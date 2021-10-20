@@ -22,13 +22,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public String getEmployee(@PathVariable Long id){
-        return "Fetching the employee details for the id " + id;
+    public Employee getEmployee(@PathVariable Long id){
+         return eService.getSingleEmployee(id);
     }
 
     @PostMapping("/employees")
-    public String saveEmployee(@RequestBody Employee employee){
-        return "Saving the employee details to the DataBase"+employee;
+    public Employee saveEmployee(@RequestBody Employee employee){
+        return eService.saveEmployee(employee);
     }
 
     @PutMapping("/employees/{id}")
