@@ -1,30 +1,24 @@
 package com.mab.springrestapi.controller;
 
 import com.mab.springrestapi.model.Employee;
+import com.mab.springrestapi.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+
 public class EmployeeController {
 
-    @Value("${app.name}")
-    private String appName;
-
-    @Value("${app.version}")
-    private String appVersion;
-
-    @Value("${app.absent:val default}")
-    private String appVelDef;
-
-    @GetMapping("/version")
-    public String getAppDetails(){
-        return appName + " - " + appVersion+ "("+appVelDef+")";
-    }
+    @Autowired
+    private EmployeeService eService;
 
 
     @GetMapping("/employees")
-    public String getEmployees(){
-        return "displaying the list of employees";
+    public List<Employee> getEmployees(){
+        return eService.getEmployees();
     }
 
     @GetMapping("/employees/{id}")
