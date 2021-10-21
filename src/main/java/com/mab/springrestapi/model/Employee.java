@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Setter
@@ -18,22 +20,19 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @NotNull(message = "Le nom ne doit être renseigné")
     private String name;
 
-    @Column(name = "age")
-    private Long age;
+    private Long age = 0L;
 
-    @Column(name = "location")
     private String location;
 
-    @Column(name = "email")
+    @Email(message = "Vous devez saisir une adresse email valide !")
     private String email;
 
-    @Column(name = "department")
+    @NotNull(message = "Le département doit être renseigné")
     private String department;
 
     @CreationTimestamp
