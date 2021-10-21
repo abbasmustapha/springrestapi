@@ -39,4 +39,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         eRepository.deleteById(id);
         System.out.println("Employee with id " + id + "deleted");
     }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        return eRepository.save(employee);
+    }
 }

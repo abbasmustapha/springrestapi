@@ -15,7 +15,6 @@ public class EmployeeController {
     @Autowired
     private EmployeeService eService;
 
-
     @GetMapping("/employees")
     public List<Employee> getEmployees(){
         return eService.getEmployees();
@@ -32,9 +31,9 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
-        System.out.println("Update in progress id :"+id + "  ("+employee+")");
-        return employee;
+    public Employee updateEmployee(@PathVariable Long id,@RequestBody Employee employee){
+        employee.setId(id);
+        return eService.updateEmployee(employee);
     }
 
     // localhost:8080/employees?id=123&name=martin
@@ -42,6 +41,5 @@ public class EmployeeController {
     public void deleteEmployee( @RequestParam("id") Long id){
         eService.deleteEmployee(id);
     }
-
 
 }
