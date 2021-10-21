@@ -39,9 +39,9 @@ public class EmployeeController {
 
     // localhost:8080/employees?id=123&name=martin
     @DeleteMapping("/employees")
-    public String deleteEmployee( @RequestParam("id") Long id,
-                                  @RequestParam("name") String name){
-        return "delete employee id " + id + " name " + name;
+    public void deleteEmployee( @RequestParam("id") Long id){
+        eService.deleteEmployee(id);
     }
+
 
 }
