@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -22,7 +24,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Le nom ne doit être renseigné")
+    @NotBlank(message = "Le nom ne doit être renseigné pas vide blanc")
     private String name;
 
     private Long age = 0L;
@@ -32,7 +34,7 @@ public class Employee {
     @Email(message = "Vous devez saisir une adresse email valide !")
     private String email;
 
-    @NotNull(message = "Le département doit être renseigné")
+    @NotBlank(message = "Le département doit être renseigné pas videcblanc")
     private String department;
 
     @CreationTimestamp
