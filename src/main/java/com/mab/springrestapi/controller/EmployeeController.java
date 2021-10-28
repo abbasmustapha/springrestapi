@@ -39,21 +39,26 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees")
-    public ResponseEntity<HttpStatus> deleteEmployee( @RequestParam("id") Long id) {
+    public ResponseEntity<HttpStatus> deleteEmployee( @RequestParam Long id) {
          eService.deleteEmployee(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("employees/filterByName")
-    public ResponseEntity<List<Employee>> getEmployeesByName(@RequestParam("name") String name) {
+    public ResponseEntity<List<Employee>> getEmployeesByName(@RequestParam String name) {
         return new ResponseEntity<List<Employee>>(eService.getEmployeesByName(name),HttpStatus.OK);
     }
 
     @GetMapping("employees/filterByNameAndLocation")
     public ResponseEntity<List<Employee>> getEmployeesByNameAndLocation(
-            @RequestParam("name") String name,
-            @RequestParam("location") String location) {
+            @RequestParam String name,
+            @RequestParam String location) {
         return new ResponseEntity<List<Employee>>(eService.getEmployeesByNameAndLocation(name,location),HttpStatus.OK);
+    }
+
+    @GetMapping("employees/filterByKeyword")
+    public ResponseEntity<List<Employee>> getEmployeesByKeyword (@RequestParam String name) {
+        return new ResponseEntity<List<Employee>>(eService.getEmployeesByKeyword(name),HttpStatus.OK);
     }
 
 }
