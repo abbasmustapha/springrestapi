@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -30,7 +29,6 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee) {
-        //return eService.saveEmployee(employee);
         return new ResponseEntity<Employee>(eService.saveEmployee(employee),HttpStatus.CREATED);
     }
 
@@ -40,11 +38,22 @@ public class EmployeeController {
         return new ResponseEntity<Employee>(eService.updateEmployee(employee),HttpStatus.OK);
     }
 
-    // localhost:8080/employees?id=123&name=martin
     @DeleteMapping("/employees")
     public ResponseEntity<HttpStatus> deleteEmployee( @RequestParam("id") Long id) {
          eService.deleteEmployee(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("employees/filterByName")
+    public ResponseEntity<List<Employee>> getEmployeesByName(@RequestParam("name") String name) {
+        return new ResponseEntity<List<Employee>>(eService.getEmployeesByName(name),HttpStatus.OK);
+    }
+
+    @GetMapping("employees/filterByNameAndLocation")
+    public ResponseEntity<List<Employee>> getEmployeesByNameAndLocation(
+            @RequestParam("name") String name,
+            @RequestParam("location") String location) {
+        return new ResponseEntity<List<Employee>>(eService.getEmployeesByNameAndLocation(name,location),HttpStatus.OK);
     }
 
 }
