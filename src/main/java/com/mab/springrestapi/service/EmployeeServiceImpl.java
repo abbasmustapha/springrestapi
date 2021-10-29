@@ -62,6 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployeesByKeyword(String name) {
-        return eRepository.findByNameContaining(name);
+        Sort sort = Sort.by(Sort.Direction.DESC,"id");
+        return eRepository.findByNameContaining(name,sort);
     }
 }
